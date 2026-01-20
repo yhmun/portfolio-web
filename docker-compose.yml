@@ -1,0 +1,14 @@
+services:
+  web:
+    container_name: caddy
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - data:/data
+      - config:/config
+
+volumes:
+  data:
+  config:
