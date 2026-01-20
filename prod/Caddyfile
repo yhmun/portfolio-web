@@ -1,0 +1,25 @@
+{$DOMAIN_NAME} {
+    handle_path /dev/* {
+        reverse_proxy host.docker.internal:8000
+    }
+
+    handle {
+        root * /usr/share/caddy
+        file_server
+    }
+
+    header {
+        Cross-Origin-Opener-Policy same-origin
+        Cross-Origin-Embedder-Policy require-corp
+    }
+
+    log {
+        output file /var/log/caddy/access.log {
+            roll_size 10MB     # Rotate log when it reaches 10MB
+            roll_keep 10       # Keep up to 10 old log files
+            roll_keep_for 720h # Keep logs for 30 days (720 hours)
+        }
+    }
+
+    encode gzip zstd
+}
