@@ -1,8 +1,8 @@
 # Use official caddy image
 FROM caddy:2-alpine
 
-# Expose build-time domain as runtime env (fallbacks to localhost if not provided)
-ARG DOMAIN_NAME=localhost
+# Expose build-time domain as runtime env
+ARG DOMAIN_NAME
 ENV DOMAIN_NAME=${DOMAIN_NAME}
 
 # Copy caddy config
